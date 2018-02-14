@@ -55,6 +55,11 @@ class SpreadsheetMapping implements \Iterator {
         $this->map = $this->mapping->map($columns);
     }
 
+    public function getMappedColumns()
+    {
+        return array_keys($this->map);
+    }
+
     public function current()
     {
         return new MappedRow($this->map, $this->rowIterator->current());

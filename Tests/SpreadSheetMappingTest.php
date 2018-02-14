@@ -52,4 +52,23 @@ class SpreadSheetMappingTest extends TestCase
         $this->assertEquals(0, $lines);
     }
 
+    public function testMappedColumns()
+    {
+        $workbook = IOFactory::load('Tests/testData/simpleok.xlsx');
+        $worksheet = $workbook->getSheet(0);
+        $mapping = new Mapping();
+        $mapping
+            ->addMapping('col1', ['test1'])
+            ->addMapping('col2', ['test2'])
+            ->addMapping('col3', ['test3'])
+        ;
+
+        $mappedSheet = new SpreadsheetMapping($worksheet, $mapping);
+        $columnKeys = $mappedSheet->getMappedColumns();
+
+        $this->assertContains('col1', $columnKeys);
+        $this->assertContains('col2', $columnKeys);
+        $this->assertContains('col3', $columnKeys);
+    }
+
 }
