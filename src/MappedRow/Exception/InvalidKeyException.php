@@ -1,6 +1,6 @@
 <?php
 
-namespace Dpiquet\SpreadSheetMapping\MappedRow\Exception;
+namespace Dpiquet\SpreadsheetMapping\MappedRow\Exception;
 
 
 class InvalidKeyException extends \Exception

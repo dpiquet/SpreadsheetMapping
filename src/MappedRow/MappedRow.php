@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dpiquet
- * Date: 13/02/18
- * Time: 16:23
- */
 
-namespace Dpiquet\SpreadSheetMapping\MappedRow;
+namespace Dpiquet\SpreadsheetMapping\MappedRow;
 
 
 use Dpiquet\Mapping\Mapping;
-use Dpiquet\SpreadSheetMapping\MappedRow\Exception\InvalidKeyException;
-use Dpiquet\SpreadSheetMapping\MappedRow\Exception\MissingValueException;
+use Dpiquet\SpreadsheetMapping\MappedRow\Exception\InvalidKeyException;
+use Dpiquet\SpreadsheetMapping\MappedRow\Exception\MissingValueException;
 use PhpOffice\PhpSpreadsheet\Worksheet\Row;
 
 class MappedRow

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dpiquet\Mapping\Tests;
+namespace Dpiquet\SpreadsheetMapping\Tests;
 
 use Dpiquet\Mapping\Mapping;
 use Dpiquet\SpreadsheetMapping\SpreadsheetMapping;
