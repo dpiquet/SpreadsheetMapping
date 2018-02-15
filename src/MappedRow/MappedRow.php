@@ -2,8 +2,6 @@
 
 namespace Dpiquet\SpreadsheetMapping\MappedRow;
 
-
-use Dpiquet\Mapping\Mapping;
 use Dpiquet\SpreadsheetMapping\MappedRow\Exception\InvalidKeyException;
 use Dpiquet\SpreadsheetMapping\MappedRow\Exception\MissingValueException;
 use PhpOffice\PhpSpreadsheet\Worksheet\Row;
@@ -47,7 +45,7 @@ class MappedRow
      * @throws MissingValueException
      */
     public function get($key) {
-        if (!in_array($key, $this->map)) {
+        if (!array_key_exists($key, $this->map)) {
             throw new InvalidKeyException($key);
         }
 

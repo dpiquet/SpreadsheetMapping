@@ -23,7 +23,10 @@ class MappedRowTest extends TestCase
 
     public function invalidKeyDataProvider()
     {
-        $cols = ['a', 'c'];
+        $cols = [
+            'a' => 0,
+            'c' => 1,
+        ];
         $mockRow = $this->createMock(Row::class);
         $mockRow
             ->method('getCellIterator')
@@ -31,8 +34,16 @@ class MappedRowTest extends TestCase
         ;
         yield ['invalidCellKey', $cols, $mockRow];
 
-        $cols = [455, 377];
-        yield ['invalidCellKey', $cols, $mockRow];
+        $numericCols = [
+            455 => 1,
+            377 => 0,
+        ];
+        $numericMockRow = $this->createMock(Row::class);
+        $numericMockRow
+            ->method('getCellIterator')
+            ->willReturn(new \ArrayIterator([$this->generateMockCell(4), $this->generateMockCell(5)]))
+        ;
+        yield ['invalidCellKey', $numericCols, $numericMockRow];
     }
 
     /**

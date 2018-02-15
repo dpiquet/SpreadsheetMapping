@@ -11,9 +11,13 @@ use PHPUnit\Framework\TestCase;
 class SpreadSheetMappingTest extends TestCase
 {
 
-    public function testBasicIntegration()
+    /**
+     * @param string $filename
+     * @dataProvider basicIntegrationFilenameProvider
+     */
+    public function testBasicIntegration($filename)
     {
-        $workbook = IOFactory::load('Tests/testData/simpleok.xlsx');
+        $workbook = IOFactory::load($filename);
         $worksheet = $workbook->getSheet(0);
 
         $mapping = new Mapping();
@@ -29,6 +33,15 @@ class SpreadSheetMappingTest extends TestCase
             $this->assertStringEndsWith('2', (string) $mappedRowValues->get('col2'));
             $this->assertStringEndsWith('3', (string) $mappedRowValues->get('col3')); // Throws Exception if not mapped
         }
+    }
+
+    /**
+     * @return \Generator|string[]
+     */
+    public function basicIntegrationFilenameProvider()
+    {
+        yield ['Tests/testData/simpleok.xlsx'];
+        yield ['Tests/testData/gaps.xlsx'];
     }
 
     public function testOnlyColumns()
