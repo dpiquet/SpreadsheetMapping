@@ -48,11 +48,11 @@ class MappedRow
      */
     public function get($key) {
         if (!in_array($key, $this->map)) {
-            throw new InvalidKeyException();
+            throw new InvalidKeyException($key);
         }
 
         if ($this->map[$key] > count($this->values)) {
-            throw new MissingValueException();
+            throw new MissingValueException($key);
         }
 
         return $this->values[$this->map[$key]];
