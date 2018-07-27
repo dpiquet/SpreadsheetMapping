@@ -55,4 +55,9 @@ class MappedRow
 
         return $this->values[$this->map[$key]];
     }
+
+    public function getRow()
+    {
+        return $this->row;
+    }
 }
