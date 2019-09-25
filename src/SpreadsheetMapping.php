@@ -3,9 +3,10 @@
 namespace Dpiquet\SpreadsheetMapping;
 
 use Dpiquet\Mapping\Exception\MappingIncompleteException;
+use Dpiquet\Mapping\Exception\OverlapColumnException;
 use Dpiquet\Mapping\Mapping;
 use Dpiquet\SpreadsheetMapping\MappedRow\MappedRow;
-use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
 use PhpOffice\PhpSpreadsheet\Worksheet\RowIterator;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -40,6 +41,7 @@ class SpreadsheetMapping implements \Iterator {
      * @param Worksheet $sheet
      * @param Mapping $mapping
      * @throws MappingIncompleteException
+     * @throws OverlapColumnException
      */
     public function __construct(Worksheet $sheet, Mapping $mapping) {
         $this->sheet = $sheet;
@@ -77,6 +79,11 @@ class SpreadsheetMapping implements \Iterator {
 
     public function valid()
     {
+        // 1st line is columms line, not a valid data index
+        if ($this->rowIterator->key() < 2) {
+            return false;
+        }
+
         return $this->rowIterator->valid(); // TODO: check values exists in this row
     }
 
@@ -84,8 +91,8 @@ class SpreadsheetMapping implements \Iterator {
     {
         try {
             return $this->rowIterator->seek(2);
-        } catch (Exception $e) {
-            // TODO: what should we do if sheet is less than 2 lines ?
+        } catch (PhpSpreadsheetException $e) {
+            // TODO: should we do something if sheet is less than 2 lines ?
         }
     }
 }
